@@ -1,0 +1,9 @@
+name: personal-website
+
+services:
+  web:
+    build: .
+    container_name: personal-website
+    restart: unless-stopped
+    ports:
+      - '8088:80'
