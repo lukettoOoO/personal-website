@@ -1,43 +1,87 @@
 # Luca-Adrian Mihuț - Personal Website
 
-A Windows 95-inspired personal portfolio built with Vue, TypeScript, and Vite.
+A nostalgic, authentic Windows 95-inspired portfolio website built with Vue 3, TypeScript, and Vite.
 
-## Development
+Features draggable desktop icons, authentic 3D beveled windows, taskbar window management, and interactive retro apps (System Properties, File Explorer, MS Paint, WordPad CV, and Control Panel).
+
+---
+
+## Tech Stack
+
+- **Framework**: [Vue 3](https://vuejs.org/) (Composition API, `<script setup>`)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite](https://vite.dev/)
+- **Styling**: Vanilla CSS (authentic Windows 95 design system)
+- **Deployment**: [Docker](https://www.docker.com/) & [Nginx](https://nginx.org/)
+
+---
+
+## Getting Started
+
+### Local Development
 
 ```bash
+# Install dependencies
 npm install
+
+# Start Vite dev server
 npm run dev
 ```
 
-Open the local URL printed by Vite. The About Me window opens automatically. Desktop icons use single-click selection and double-click opening, matching the Windows 95 interaction model.
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-## Build
+### Production Build
 
 ```bash
+# Type-check and build for production
 npm run build
+
+# Preview production build locally
 npm run preview
 ```
 
-## Project structure
+---
 
-- `src/App.vue` owns desktop state, window state, focus order, dragging, and content composition.
-- `src/components/Desktop.vue` renders selectable and draggable desktop icons.
-- `src/components/WindowFrame.vue` renders reusable title bars and window controls.
-- `src/components/FileExplorer.vue` renders the Projects Explorer view.
-- `src/components/Taskbar.vue` renders Start, open-window buttons, and the clock.
-- `src/data/` contains typed CV, project, contact, and blog data.
-- `public/icons/` contains the Windows 95 and GifCities-style assets.
+## Docker Deployment
 
-## PHP endpoint
-
-`api/profile.php` is an optional JSON endpoint for PHP-capable hosting. Vite serves the frontend but does not execute PHP. For local PHP testing, run a PHP server from the project root:
+Build and run the production container with Docker Compose:
 
 ```bash
-php -S localhost:8080
+# Build and start container in detached mode
+docker compose up -d --build
 ```
 
-Then visit `/api/profile.php` on that server. The current Vue app uses typed local data so frontend development does not depend on PHP being available.
+The site will be available at [http://localhost:8088](http://localhost:8088).
 
-## Privacy
+To stop the container:
 
-The public interface intentionally excludes the CV's date of birth, phone number, and full residential addresses. Professional contact links and email are included.
+```bash
+docker compose down
+```
+
+---
+
+## Project Structure
+
+```text
+├── public/              # Static assets, retro icons (.gif, .png), audio, media
+├── src/
+│   ├── components/
+│   │   ├── Desktop.vue        # Desktop surface & draggable icon layout
+│   │   ├── FileExplorer.vue   # Windows Explorer folder views
+│   │   ├── Taskbar.vue        # Windows 95 taskbar, Start button, & system tray
+│   │   └── WindowFrame.vue    # Reusable draggable window frame & controls
+│   ├── data/                  # Typed project, CV, contact, and bio data
+│   ├── App.vue                # Main desktop environment & window manager
+│   ├── main.ts                # App entrypoint
+│   └── style.css              # Global retro styles & Windows 95 UI theme
+├── Dockerfile           # Multi-stage production build (Node.js -> Nginx)
+├── docker-compose.yml   # Docker compose configuration (port 8088)
+└── nginx.conf           # Production Nginx configuration (gzip, caching, SPA routing)
+```
+
+---
+
+## License
+
+MIT

@@ -313,6 +313,7 @@ function startWindowDrag(event: PointerEvent, id: WindowId) {
   dragState.value = {
     type: 'window',
     id,
+    // cursor coordinates inside the window:
     offsetX: event.clientX - windowState.x,
     offsetY: event.clientY - windowState.y,
   };
@@ -327,6 +328,7 @@ function startIconDrag(event: PointerEvent, id: string) {
   dragState.value = {
     type: 'icon',
     id,
+    // cursor coordinates inside the icon:
     offsetX: event.clientX - icon.x,
     offsetY: event.clientY - icon.y,
   };
